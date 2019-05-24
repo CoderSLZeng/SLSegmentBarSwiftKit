@@ -1,0 +1,16 @@
+PODS:
+  - SLSegmentBarSwiftKit (0.1.0)
+
+DEPENDENCIES:
+  - SLSegmentBarSwiftKit (from `../`)
+
+EXTERNAL SOURCES:
+  SLSegmentBarSwiftKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SLSegmentBarSwiftKit: 05068c94aa4ea7e57643c39027ab83f16ffee031
+
+PODFILE CHECKSUM: 92b4d4d9d6c530aa13145902a920727b7498625a
+
+COCOAPODS: 1.6.0
