@@ -13,6 +13,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		AEA314762297D88500412B48 /* SegmentBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA314752297D88500412B48 /* SegmentBar.swift */; };
 		D488846228E3CF51BE25DE2F /* Pods_SLSegmentBarSwiftKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 679CFECD3AADC46D24482AFE /* Pods_SLSegmentBarSwiftKit_Example.framework */; };
 		ED74D196DF94EF94CCA8103D /* Pods_SLSegmentBarSwiftKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893A90F1AFD354978EFFBC1D /* Pods_SLSegmentBarSwiftKit_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		758B9BC03E12C87A3C6EE542 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		87EA72EF71B830822DD2C663 /* Pods-SLSegmentBarSwiftKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLSegmentBarSwiftKit_Example.release.xcconfig"; path = "Target Support Files/Pods-SLSegmentBarSwiftKit_Example/Pods-SLSegmentBarSwiftKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		893A90F1AFD354978EFFBC1D /* Pods_SLSegmentBarSwiftKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SLSegmentBarSwiftKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEA314752297D88500412B48 /* SegmentBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentBar.swift; sourceTree = "<group>"; };
 		B6BC63A31EDD0A8B18F9E711 /* Pods-SLSegmentBarSwiftKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLSegmentBarSwiftKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-SLSegmentBarSwiftKit_Tests/Pods-SLSegmentBarSwiftKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D31CB0F9EFEA4138FB55DB31 /* SLSegmentBarSwiftKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SLSegmentBarSwiftKit.podspec; path = ../SLSegmentBarSwiftKit.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,6 +95,7 @@
 		607FACD21AFB9204008FA782 /* Example for SLSegmentBarSwiftKit */ = {
 			isa = PBXGroup;
 			children = (
+				AEA314732297D85B00412B48 /* Classes */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -157,6 +160,22 @@
 				6D9CD9FB31A027A09A97317C /* Pods-SLSegmentBarSwiftKit_Tests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		AEA314732297D85B00412B48 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				AEA314742297D86700412B48 /* View */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		AEA314742297D86700412B48 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AEA314752297D88500412B48 /* SegmentBar.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEA314762297D88500412B48 /* SegmentBar.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
@@ -492,7 +512,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = CF3ZTC43YH;
 				INFOPLIST_FILE = SLSegmentBarSwiftKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -508,7 +528,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = CF3ZTC43YH;
 				INFOPLIST_FILE = SLSegmentBarSwiftKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
