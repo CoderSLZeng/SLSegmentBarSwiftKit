@@ -10,37 +10,11 @@ import UIKit
 
 class SegmentBar: UIView {
     
+    // MARK: - 属性
     // MARK: 公共属性
-    var titles: [String]? {
-        willSet(newTitles) {
-            
-            guard let newTitles = newTitles else {
-                return
-            }
-            
-            // 删除之前添加过的标题按钮
-            if let titleBtns = titleBtns {
-                for btn in titleBtns {
-                    btn.removeFromSuperview()
-                }
-            }
-            
-            titleBtns?.removeAll()
-            titleBtns = nil
-            
-            // 添加新的标题按钮
-            titleBtns = [UIButton]()
-            for title in newTitles {
-                let btn = UIButton(type: .custom)
-                btn.setTitle(title, for: .normal)
-                btn.backgroundColor = .green
-                contentView?.addSubview(btn)
-                titleBtns?.append(btn)
-            }
-            
-            // 手动刷新视图
-            setNeedsLayout()
-            layoutIfNeeded()
+    var titles = [""] {
+        didSet(old) {
+            setupTitles(titles)
         }
     }
     
@@ -54,12 +28,14 @@ class SegmentBar: UIView {
     
     // MARK: - 初始化
     override init(frame: CGRect) {
+        super.init(frame: frame);
+        setupUI(frame)
+    }
+    
+    init(frame: CGRect, titles: [String]) {
         super.init(frame: frame)
-        let scrollView = UIScrollView(frame: frame)
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.bounces = false
-        self.addSubview(scrollView)
-        contentView = scrollView
+        setupUI(frame)
+        setupTitles(titles)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -100,4 +76,40 @@ class SegmentBar: UIView {
         self.contentView?.contentSize = CGSize(width: lastX, height: 0)
     }
     
+}
+
+extension SegmentBar {
+    fileprivate func setupUI(_ frame: CGRect) {
+        let scrollView = UIScrollView(frame: frame)
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.bounces = false
+        self.addSubview(scrollView)
+        contentView = scrollView
+    }
+    
+    fileprivate func setupTitles(_ titles: [String]) {
+        // 删除之前添加过的标题按钮
+        if let titleBtns = titleBtns {
+            for btn in titleBtns {
+                btn.removeFromSuperview()
+            }
+        }
+        
+        titleBtns?.removeAll()
+        titleBtns = nil
+        
+        // 添加新的标题按钮
+        titleBtns = [UIButton]()
+        for title in titles {
+            let btn = UIButton(type: .custom)
+            btn.setTitle(title, for: .normal)
+            btn.backgroundColor = .green
+            contentView?.addSubview(btn)
+            titleBtns?.append(btn)
+        }
+        
+        // 手动刷新视图
+        setNeedsLayout()
+        layoutIfNeeded()
+    }
 }

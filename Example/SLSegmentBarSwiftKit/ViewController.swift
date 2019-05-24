@@ -15,10 +15,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let segmentBar = SegmentBar(frame: CGRect(x: 0, y: 44, width: view.frame.width, height: 35))
+        let titles = ["标题1", "标题标题2", "标题标题3", "标题4", "标题5", "标题6"]
+        let segmentBar = SegmentBar(frame: CGRect(x: 0, y: 44, width: view.frame.width, height: 35), titles: titles)
         segmentBar.backgroundColor = .red
-        segmentBar.titles = ["标题1", "标题标题2", "标题标题3", "标题4", "标题5", "标题6"]
         self.view.addSubview(segmentBar)
         self.segmentBar = segmentBar
     }
