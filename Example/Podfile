@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SLSegmentBarSwiftKit_Example' do
+  pod 'SLSegmentBarSwiftKit', :path => '../'
+
+  target 'SLSegmentBarSwiftKit_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
