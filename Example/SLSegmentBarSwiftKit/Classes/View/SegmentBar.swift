@@ -20,15 +20,25 @@ class SegmentBar: UIView {
     
     // MARK: 私有属性
     /// 标题按钮之间的最小间隙
-    private let minMargin: CGFloat = 30;
+    private let minMargin: CGFloat = 30
     /// 内容承载视图
     private var contentView: UIScrollView?
     /// 标题按钮数据源
     private var titleBtns: [UIButton]?
+    /// 最后选中的按钮
+    private var lastBtn: UIButton?
+    
+    private lazy var indicatorView: UIView = {
+        let height: CGFloat = 2
+        let y = frame.height - height
+        let frame = CGRect(x: 0, y: y, width: 0, height: height)
+        let view = UIView(frame: frame)
+        return view
+    }()
     
     // MARK: - 初始化
     override init(frame: CGRect) {
-        super.init(frame: frame);
+        super.init(frame: frame)
         setupUI(frame)
     }
     
@@ -50,7 +60,7 @@ class SegmentBar: UIView {
             return
         }
         
-        contentView?.frame = bounds;
+        contentView?.frame = bounds
         
         var totalBtnWidth: CGFloat = 0
         
@@ -78,12 +88,14 @@ class SegmentBar: UIView {
     
 }
 
+// MARK: - 设置UI
 extension SegmentBar {
     fileprivate func setupUI(_ frame: CGRect) {
         let scrollView = UIScrollView(frame: frame)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.bounces = false
         self.addSubview(scrollView)
+        self.addSubview(self.indicatorView)
         contentView = scrollView
     }
     
@@ -103,7 +115,9 @@ extension SegmentBar {
         for title in titles {
             let btn = UIButton(type: .custom)
             btn.setTitle(title, for: .normal)
-            btn.backgroundColor = .green
+            btn.setTitleColor(.black, for: .normal)
+            btn.setTitleColor(.red, for: .selected)
+            btn.addTarget(self, action: #selector(SegmentBar.titleButtonDidClicked), for: .touchUpInside)
             contentView?.addSubview(btn)
             titleBtns?.append(btn)
         }
@@ -111,5 +125,29 @@ extension SegmentBar {
         // 手动刷新视图
         setNeedsLayout()
         layoutIfNeeded()
+    }
+}
+
+// MARK: - 监听
+extension SegmentBar {
+    @objc func titleButtonDidClicked(_ btn: UIButton) {
+        // 更新选中状态
+        lastBtn?.isSelected = false
+        btn.isSelected = true
+        lastBtn = btn
+        
+        // 更新指示器视图的位置
+        UIView.animate(withDuration: 0.1) {
+            self.indicatorView.frame.size.width = btn.frame.width
+            self.indicatorView.center.x = btn.center.x
+        }
+        
+        // 更新内容视图的滚动位置
+        var scrollX: CGFloat = btn.center.x - contentView!.frame.width * 0.5;
+        if scrollX < 0 { scrollX = 0 }
+        let maxWidth = contentView!.contentSize.width - contentView!.frame.width
+        if scrollX > maxWidth { scrollX = maxWidth }
+        contentView?.setContentOffset(CGPoint(x: scrollX, y: 0), animated: true)
+        
     }
 }
