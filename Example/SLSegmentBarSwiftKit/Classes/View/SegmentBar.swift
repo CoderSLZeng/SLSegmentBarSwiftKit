@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol SegmentBarDelegate: class {
+    @objc func selected(toIndex: Int, fromIndex: Int)
+}
+
 class SegmentBar: UIView {
     
     // MARK: - 属性
@@ -17,6 +21,10 @@ class SegmentBar: UIView {
             setupTitles(titles)
         }
     }
+    
+    weak var delegate: SegmentBarDelegate?
+    
+    var selectedCallBack: ((_ toIndex: Int, _ fromIndex: Int) -> ())?
     
     // MARK: 私有属性
     /// 标题按钮之间的最小间隙
@@ -33,6 +41,8 @@ class SegmentBar: UIView {
         let y = frame.height - height
         let frame = CGRect(x: 0, y: y, width: 0, height: height)
         let view = UIView(frame: frame)
+        view.backgroundColor = .red
+        contentView?.addSubview(view)
         return view
     }()
     
@@ -69,7 +79,7 @@ class SegmentBar: UIView {
             totalBtnWidth += btn.frame.width
         }
         
-        var caculateMargin: CGFloat = (self.frame.width - totalBtnWidth) / CGFloat(titleBtns.count + 1)
+        var caculateMargin: CGFloat = (frame.width - totalBtnWidth) / CGFloat(titleBtns.count + 1)
         if caculateMargin < minMargin {
             caculateMargin = minMargin
         }
@@ -94,12 +104,12 @@ extension SegmentBar {
         let scrollView = UIScrollView(frame: frame)
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.bounces = false
-        self.addSubview(scrollView)
-        self.addSubview(self.indicatorView)
+        addSubview(scrollView)
         contentView = scrollView
     }
     
     fileprivate func setupTitles(_ titles: [String]) {
+        
         // 删除之前添加过的标题按钮
         if let titleBtns = titleBtns {
             for btn in titleBtns {
@@ -118,6 +128,7 @@ extension SegmentBar {
             btn.setTitleColor(.black, for: .normal)
             btn.setTitleColor(.red, for: .selected)
             btn.addTarget(self, action: #selector(SegmentBar.titleButtonDidClicked), for: .touchUpInside)
+            btn.tag = titleBtns!.count
             contentView?.addSubview(btn)
             titleBtns?.append(btn)
         }
@@ -131,6 +142,15 @@ extension SegmentBar {
 // MARK: - 监听
 extension SegmentBar {
     @objc func titleButtonDidClicked(_ btn: UIButton) {
+        
+        delegate?.selected(toIndex: btn.tag, fromIndex: lastBtn?.tag ?? 0)
+        
+        if selectedCallBack != nil {
+            selectedCallBack!(btn.tag, lastBtn?.tag ?? 0)
+        }
+        
+        lastBtn?.tag = btn.tag
+        
         // 更新选中状态
         lastBtn?.isSelected = false
         btn.isSelected = true
@@ -143,7 +163,7 @@ extension SegmentBar {
         }
         
         // 更新内容视图的滚动位置
-        var scrollX: CGFloat = btn.center.x - contentView!.frame.width * 0.5;
+        var scrollX: CGFloat = btn.center.x - contentView!.frame.width * 0.5
         if scrollX < 0 { scrollX = 0 }
         let maxWidth = contentView!.contentSize.width - contentView!.frame.width
         if scrollX > maxWidth { scrollX = maxWidth }
