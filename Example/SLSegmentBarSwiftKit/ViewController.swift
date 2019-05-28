@@ -45,6 +45,31 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.titleView = segmentBarVC.segmentBar
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: UInt64(0.5))) {
+
+
+            self.segmentBarVC.segmentBar.update({ (config) in
+//                config.backgroundColor = .cyan
+//                config.minMargin = 150
+//                config.titleNormalColor = .brown
+//                config.titleSelectedColor = .yellow
+//                config.titleFont = .systemFont(ofSize: 10)
+//                config.indicatorColor = .yellow
+//                config.indicatorHeight = 5
+//                config.indicatorExtarWidth = 40
+                
+                _ = config.backgroundColor(.darkGray)
+                    .minMargin(10)
+                    .titleNormalColor(.brown)
+                    .titleSelectedColor(.purple)
+                    .titleFont(.systemFont(ofSize: 18))
+                    .indicatorColor(.purple)
+                    .indicatorHeight(4)
+                    .indicatorExtarWidth(5)
+                
+            })
+        }
     }
     
     // MARK: - 布局

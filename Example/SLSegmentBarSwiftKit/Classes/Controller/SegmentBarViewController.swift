@@ -24,7 +24,6 @@ class SegmentBarViewController: UIViewController {
     // MARK: 懒加载
     lazy var segmentBar: SegmentBar = {
         let segmentBar = SegmentBar(frame: .zero)
-        segmentBar.backgroundColor = .blue
         view.addSubview(segmentBar)
         return segmentBar
     }()
@@ -49,7 +48,7 @@ class SegmentBarViewController: UIViewController {
             addChild(child)
         }
         
-        segmentBar.selectedCallBack = { [weak self]
+        segmentBar.selectedCallback = { [weak self]
             toIndex, _ in
             self?.showViewFromChildren(toIndex)
         }

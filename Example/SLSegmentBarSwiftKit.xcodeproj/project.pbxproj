@@ -15,6 +15,7 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		AEA314762297D88500412B48 /* SegmentBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA314752297D88500412B48 /* SegmentBar.swift */; };
 		AEA319BD229CBA600067EA0D /* SegmentBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA319BC229CBA600067EA0D /* SegmentBarViewController.swift */; };
+		AEA319C4229D1AEE0067EA0D /* SegmentBarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA319C3229D1AEE0067EA0D /* SegmentBarConfig.swift */; };
 		D488846228E3CF51BE25DE2F /* Pods_SLSegmentBarSwiftKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 679CFECD3AADC46D24482AFE /* Pods_SLSegmentBarSwiftKit_Example.framework */; };
 		ED74D196DF94EF94CCA8103D /* Pods_SLSegmentBarSwiftKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893A90F1AFD354978EFFBC1D /* Pods_SLSegmentBarSwiftKit_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -49,6 +50,7 @@
 		893A90F1AFD354978EFFBC1D /* Pods_SLSegmentBarSwiftKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SLSegmentBarSwiftKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA314752297D88500412B48 /* SegmentBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentBar.swift; sourceTree = "<group>"; };
 		AEA319BC229CBA600067EA0D /* SegmentBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentBarViewController.swift; sourceTree = "<group>"; };
+		AEA319C3229D1AEE0067EA0D /* SegmentBarConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentBarConfig.swift; sourceTree = "<group>"; };
 		B6BC63A31EDD0A8B18F9E711 /* Pods-SLSegmentBarSwiftKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLSegmentBarSwiftKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-SLSegmentBarSwiftKit_Tests/Pods-SLSegmentBarSwiftKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D31CB0F9EFEA4138FB55DB31 /* SLSegmentBarSwiftKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SLSegmentBarSwiftKit.podspec; path = ../SLSegmentBarSwiftKit.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,6 +169,7 @@
 		AEA314732297D85B00412B48 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AEA319C2229D1AD40067EA0D /* Config */,
 				AEA319BB229CBA3E0067EA0D /* Controller */,
 				AEA314742297D86700412B48 /* View */,
 			);
@@ -187,6 +190,14 @@
 				AEA319BC229CBA600067EA0D /* SegmentBarViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		AEA319C2229D1AD40067EA0D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				AEA319C3229D1AEE0067EA0D /* SegmentBarConfig.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,6 +380,7 @@
 			files = (
 				AEA314762297D88500412B48 /* SegmentBar.swift in Sources */,
 				AEA319BD229CBA600067EA0D /* SegmentBarViewController.swift in Sources */,
+				AEA319C4229D1AEE0067EA0D /* SegmentBarConfig.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);

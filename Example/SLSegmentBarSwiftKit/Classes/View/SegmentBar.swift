@@ -35,11 +35,9 @@ class SegmentBar: UIView {
     
     weak var delegate: SegmentBarDelegate?
     
-    var selectedCallBack: ((_ toIndex: Int, _ fromIndex: Int) -> ())?
+    var selectedCallback: ((_ toIndex: Int, _ fromIndex: Int) -> ())?
     
     // MARK: 私有属性
-    /// 标题按钮之间的最小间隙
-    private let minMargin: CGFloat = 30
     /// 内容承载视图
     private var contentView: UIScrollView?
     /// 标题按钮数据源
@@ -49,20 +47,17 @@ class SegmentBar: UIView {
     
     private lazy var indicatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .red
+        view.backgroundColor = config.indicatorColor
         contentView?.addSubview(view)
         return view
     }()
+    
+    private lazy var config: SegmentBarConfig = SegmentBarConfig.defalutConfig
     
     // MARK: - 生命周期
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI(frame)
-    }
-    
-    convenience init(frame: CGRect, titles: [String]) {
-        self.init(frame: frame)
-        setupTitles(titles)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -88,8 +83,8 @@ class SegmentBar: UIView {
         }
         
         var caculateMargin: CGFloat = (frame.width - totalBtnWidth) / CGFloat(titleBtns.count + 1)
-        if caculateMargin < minMargin {
-            caculateMargin = minMargin
+        if caculateMargin < config.minMargin {
+            caculateMargin = config.minMargin
         }
         
         // 标题按钮的位置
@@ -106,12 +101,43 @@ class SegmentBar: UIView {
         contentView?.contentSize = CGSize(width: lastX, height: 0)
         
         // 指示器的位置
-        guard let lastBtn = lastBtn, let contentView = contentView else { return }
-        let height: CGFloat = 2;
-        let y: CGFloat = contentView.bounds.height - height
-        indicatorView.frame = CGRect(x: lastBtn.frame.origin.x, y: y, width: lastBtn.bounds.width, height: height)
+        let btn = titleBtns[selectedIndex]
+        indicatorView.frame = CGRect(x: btn.frame.origin.x,
+                                     y: bounds.height - config.indicatorHeight,
+                                     width: btn.bounds.width + config.indicatorExtarWidth * 2,
+                                     height: config.indicatorHeight)
+        indicatorView.center.x = btn.center.x
     }
     
+}
+
+// MARK: - 接口
+extension SegmentBar {
+    convenience init(frame: CGRect, titles: [String]) {
+        self.init(frame: frame)
+        setupTitles(titles)
+    }
+    
+    func update(_ configCallBack: (_ config: SegmentBarConfig) -> ()) {
+        
+        configCallBack(config)
+        
+        backgroundColor = config.backgroundColor
+        
+        guard let titleBtns = titleBtns else { return }
+        for btn in titleBtns {
+            btn.setTitleColor(config.titleNormalColor, for: .normal)
+            btn.setTitleColor(config.titleSelectedColor, for: .selected)
+            btn.titleLabel?.font = config.titleFont
+        }
+        
+        indicatorView.backgroundColor = config.indicatorColor
+        
+        
+        setNeedsLayout()
+        layoutIfNeeded()
+        
+    }
 }
 
 // MARK: - 设置UI
@@ -143,8 +169,9 @@ extension SegmentBar {
         for title in titles {
             let btn = UIButton(type: .custom)
             btn.setTitle(title, for: .normal)
-            btn.setTitleColor(.black, for: .normal)
-            btn.setTitleColor(.red, for: .selected)
+            btn.setTitleColor(config.titleNormalColor, for: .normal)
+            btn.setTitleColor(config.titleSelectedColor, for: .selected)
+            btn.titleLabel?.font = config.titleFont
             btn.addTarget(self, action: #selector(SegmentBar.titleButtonDidClicked), for: .touchUpInside)
             btn.tag = titleBtns!.count
             contentView?.addSubview(btn)
@@ -163,8 +190,8 @@ extension SegmentBar {
         
         delegate?.selected(toIndex: btn.tag, fromIndex: lastBtn?.tag ?? 0)
         
-        if selectedCallBack != nil {
-            selectedCallBack!(btn.tag, lastBtn?.tag ?? 0)
+        if selectedCallback != nil {
+            selectedCallback!(btn.tag, lastBtn?.tag ?? 0)
         }
         
         // 更新选中状态
@@ -174,7 +201,7 @@ extension SegmentBar {
         
         // 更新指示器视图的位置
         UIView.animate(withDuration: 0.1) {
-            self.indicatorView.frame.size.width = btn.frame.width
+            self.indicatorView.frame.size.width = btn.frame.width + self.config.indicatorExtarWidth * 2
             self.indicatorView.center.x = btn.center.x
         }
         
