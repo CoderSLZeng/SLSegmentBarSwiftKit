@@ -9,37 +9,52 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    lazy var segmentBar: SegmentBar = {
-         let titles = ["标题1", "标题标题2", "标题标题3", "标题4", "标题5", "标题6"]
-        let segmentBar = SegmentBar(frame: CGRect(x: 0,
-                                                  y: 64,
-                                                  width: view.frame.width,
-                                                  height: 35),
-                                    titles: titles)
-        segmentBar.backgroundColor = .blue
-//        segmentBar.delegate = self
-        return segmentBar
+
+    // MARK: - 属性
+    // MARK: 懒加载
+    lazy var segmentBarVC: SegmentBarViewController = {
+        let titles = ["标题标题1", "标题标题标题2", "标题3", "标题标题标题4", "标题5"]
+        let segmentBarVc = SegmentBarViewController(titles: titles, children: childrenVCs)
+        addChild(segmentBarVc)
+        view.addSubview(segmentBarVc.view)
+        return segmentBarVc
     }()
     
+    // MARK: 私有属性
+    var childrenVCs: [UIViewController] {
+        let a = UIViewController()
+        a.view.backgroundColor = .red
+        
+        let b = UIViewController()
+        b.view.backgroundColor = .green
+        
+        let c = UIViewController()
+        c.view.backgroundColor = .blue
+        
+        let d = UIViewController()
+        d.view.backgroundColor = .purple
+        
+        let e = UIViewController()
+        e.view.backgroundColor = .darkGray
+        
+        return [a, b, c, d, e]
+    }
+    
+    // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        view.addSubview(segmentBar)
-        automaticallyAdjustsScrollViewInsets = false
-        segmentBar.selectedCallBack = {
-            toIndex, fromIndex in
-            
-             print("toIndex = \(toIndex), fromInde = \(fromIndex)")
-        }
         
+        navigationItem.titleView = segmentBarVC.segmentBar
+    }
+    
+    // MARK: - 布局
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        segmentBarVC.view.frame = view.bounds
+        segmentBarVC.segmentBar.frame = CGRect(x: 0, y: 0, width: 300, height: 35)
     }
 
 }
 
-extension ViewController: SegmentBarDelegate {
-    func selected(toIndex: Int, fromIndex: Int) {
-        print("toIndex = \(toIndex), fromInde = \(fromIndex)")
-    }
-}
+
 

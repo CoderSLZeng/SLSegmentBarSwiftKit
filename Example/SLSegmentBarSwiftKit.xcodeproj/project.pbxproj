@@ -14,7 +14,7 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		AEA314762297D88500412B48 /* SegmentBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA314752297D88500412B48 /* SegmentBar.swift */; };
-		AEA319AF229B817F0067EA0D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA319AE229B817F0067EA0D /* MainViewController.swift */; };
+		AEA319BD229CBA600067EA0D /* SegmentBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA319BC229CBA600067EA0D /* SegmentBarViewController.swift */; };
 		D488846228E3CF51BE25DE2F /* Pods_SLSegmentBarSwiftKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 679CFECD3AADC46D24482AFE /* Pods_SLSegmentBarSwiftKit_Example.framework */; };
 		ED74D196DF94EF94CCA8103D /* Pods_SLSegmentBarSwiftKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893A90F1AFD354978EFFBC1D /* Pods_SLSegmentBarSwiftKit_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -48,7 +48,7 @@
 		87EA72EF71B830822DD2C663 /* Pods-SLSegmentBarSwiftKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLSegmentBarSwiftKit_Example.release.xcconfig"; path = "Target Support Files/Pods-SLSegmentBarSwiftKit_Example/Pods-SLSegmentBarSwiftKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		893A90F1AFD354978EFFBC1D /* Pods_SLSegmentBarSwiftKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SLSegmentBarSwiftKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEA314752297D88500412B48 /* SegmentBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentBar.swift; sourceTree = "<group>"; };
-		AEA319AE229B817F0067EA0D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		AEA319BC229CBA600067EA0D /* SegmentBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentBarViewController.swift; sourceTree = "<group>"; };
 		B6BC63A31EDD0A8B18F9E711 /* Pods-SLSegmentBarSwiftKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLSegmentBarSwiftKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-SLSegmentBarSwiftKit_Tests/Pods-SLSegmentBarSwiftKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D31CB0F9EFEA4138FB55DB31 /* SLSegmentBarSwiftKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SLSegmentBarSwiftKit.podspec; path = ../SLSegmentBarSwiftKit.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,7 +100,6 @@
 				AEA314732297D85B00412B48 /* Classes */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				AEA319AE229B817F0067EA0D /* MainViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -168,6 +167,7 @@
 		AEA314732297D85B00412B48 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AEA319BB229CBA3E0067EA0D /* Controller */,
 				AEA314742297D86700412B48 /* View */,
 			);
 			path = Classes;
@@ -179,6 +179,14 @@
 				AEA314752297D88500412B48 /* SegmentBar.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		AEA319BB229CBA3E0067EA0D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AEA319BC229CBA600067EA0D /* SegmentBarViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,9 +368,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEA314762297D88500412B48 /* SegmentBar.swift in Sources */,
+				AEA319BD229CBA600067EA0D /* SegmentBarViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				AEA319AF229B817F0067EA0D /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

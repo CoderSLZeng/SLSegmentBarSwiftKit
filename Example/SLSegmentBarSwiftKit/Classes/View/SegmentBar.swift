@@ -17,8 +17,19 @@ class SegmentBar: UIView {
     // MARK: - 属性
     // MARK: 公共属性
     var titles = [""] {
-        didSet(old) {
+        didSet {
             setupTitles(titles)
+        }
+    }
+    
+    var selectedIndex = 0 {
+        didSet(old) {
+            // 数据过滤
+            guard let titleBtns = titleBtns else { return }
+            if 0 == titleBtns.count || selectedIndex < 0 || selectedIndex > titleBtns.count - 1 { return }
+            
+            let btn = titleBtns[selectedIndex]
+            titleButtonDidClicked(btn)
         }
     }
     
@@ -37,24 +48,20 @@ class SegmentBar: UIView {
     private var lastBtn: UIButton?
     
     private lazy var indicatorView: UIView = {
-        let height: CGFloat = 2
-        let y = frame.height - height
-        let frame = CGRect(x: 0, y: y, width: 0, height: height)
-        let view = UIView(frame: frame)
+        let view = UIView()
         view.backgroundColor = .red
         contentView?.addSubview(view)
         return view
     }()
     
-    // MARK: - 初始化
+    // MARK: - 生命周期
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI(frame)
     }
     
-    init(frame: CGRect, titles: [String]) {
-        super.init(frame: frame)
-        setupUI(frame)
+    convenience init(frame: CGRect, titles: [String]) {
+        self.init(frame: frame)
         setupTitles(titles)
     }
     
@@ -66,12 +73,13 @@ class SegmentBar: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        guard let titleBtns = titleBtns else {
-            return
-        }
+        // 数据校验
+        guard let titleBtns = titleBtns else {return }
         
+        // 承载内容视图的位置
         contentView?.frame = bounds
         
+        // 计算标题按钮之前的间距
         var totalBtnWidth: CGFloat = 0
         
         for btn in titleBtns {
@@ -84,6 +92,7 @@ class SegmentBar: UIView {
             caculateMargin = minMargin
         }
         
+        // 标题按钮的位置
         var lastX: CGFloat = caculateMargin
         for btn in titleBtns {
             btn.sizeToFit()
@@ -93,7 +102,14 @@ class SegmentBar: UIView {
             lastX += btn.frame.width + caculateMargin
         }
         
-        self.contentView?.contentSize = CGSize(width: lastX, height: 0)
+        // 承载内容视图的内容大小
+        contentView?.contentSize = CGSize(width: lastX, height: 0)
+        
+        // 指示器的位置
+        guard let lastBtn = lastBtn, let contentView = contentView else { return }
+        let height: CGFloat = 2;
+        let y: CGFloat = contentView.bounds.height - height
+        indicatorView.frame = CGRect(x: lastBtn.frame.origin.x, y: y, width: lastBtn.bounds.width, height: height)
     }
     
 }
@@ -109,6 +125,8 @@ extension SegmentBar {
     }
     
     fileprivate func setupTitles(_ titles: [String]) {
+        
+        assert(0 != titles.count, "标题数据源不能为空")
         
         // 删除之前添加过的标题按钮
         if let titleBtns = titleBtns {
@@ -149,8 +167,6 @@ extension SegmentBar {
             selectedCallBack!(btn.tag, lastBtn?.tag ?? 0)
         }
         
-        lastBtn?.tag = btn.tag
-        
         // 更新选中状态
         lastBtn?.isSelected = false
         btn.isSelected = true
@@ -163,6 +179,7 @@ extension SegmentBar {
         }
         
         // 更新内容视图的滚动位置
+        if 0 == frame.width { return }
         var scrollX: CGFloat = btn.center.x - contentView!.frame.width * 0.5
         if scrollX < 0 { scrollX = 0 }
         let maxWidth = contentView!.contentSize.width - contentView!.frame.width
