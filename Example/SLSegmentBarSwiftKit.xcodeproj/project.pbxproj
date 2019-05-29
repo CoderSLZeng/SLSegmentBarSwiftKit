@@ -52,7 +52,7 @@
 		AEA319BC229CBA600067EA0D /* SegmentBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentBarViewController.swift; sourceTree = "<group>"; };
 		AEA319C3229D1AEE0067EA0D /* SegmentBarConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentBarConfig.swift; sourceTree = "<group>"; };
 		B6BC63A31EDD0A8B18F9E711 /* Pods-SLSegmentBarSwiftKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SLSegmentBarSwiftKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-SLSegmentBarSwiftKit_Tests/Pods-SLSegmentBarSwiftKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		D31CB0F9EFEA4138FB55DB31 /* SLSegmentBarSwiftKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SLSegmentBarSwiftKit.podspec; path = ../SLSegmentBarSwiftKit.podspec; sourceTree = "<group>"; };
+		D31CB0F9EFEA4138FB55DB31 /* SLSegmentBarSwiftKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SLSegmentBarSwiftKit.podspec; path = ../SLSegmentBarSwiftKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

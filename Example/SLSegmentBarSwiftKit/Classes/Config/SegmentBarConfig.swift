@@ -28,6 +28,8 @@ class SegmentBarConfig: NSObject {
     var indicatorHeight: CGFloat = 2
     /// 指示器的额外宽度
     var indicatorExtarWidth: CGFloat = 0
+    /// 是否显示指示器
+    var isShowIndicator: Bool = true
     
     class var defalutConfig: SegmentBarConfig {
         return SegmentBarConfig()
@@ -70,6 +72,11 @@ class SegmentBarConfig: NSObject {
     
     func indicatorExtarWidth(_ width: CGFloat) -> SegmentBarConfig {
         indicatorExtarWidth = width
+        return self
+    }
+    
+    func isShowIndicator(_ isShow: Bool) -> SegmentBarConfig {
+        isShowIndicator = isShow
         return self
     }
     

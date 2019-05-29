@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         
         navigationItem.titleView = segmentBarVC.segmentBar
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: UInt64(0.5))) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: UInt64(5))) {
 
 
             self.segmentBarVC.segmentBar.update({ (config) in
@@ -67,6 +67,7 @@ class ViewController: UIViewController {
                     .indicatorColor(.purple)
                     .indicatorHeight(4)
                     .indicatorExtarWidth(5)
+                    .isShowIndicator(false)
                 
             })
         }

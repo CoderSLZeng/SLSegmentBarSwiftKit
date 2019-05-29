@@ -100,6 +100,11 @@ class SegmentBar: UIView {
         // 承载内容视图的内容大小
         contentView?.contentSize = CGSize(width: lastX, height: 0)
         
+        if config.isShowIndicator == false {
+            indicatorView.frame = CGRect.zero
+            return
+        }
+        
         // 指示器的位置
         let btn = titleBtns[selectedIndex]
         indicatorView.frame = CGRect(x: btn.frame.origin.x,
@@ -132,7 +137,6 @@ extension SegmentBar {
         }
         
         indicatorView.backgroundColor = config.indicatorColor
-        
         
         setNeedsLayout()
         layoutIfNeeded()
